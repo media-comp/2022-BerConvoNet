@@ -28,7 +28,7 @@ jobs:
       # Runs a single command using the runners shell
       - name: Install dependencies
         run: |
-            pip install pytorch
+            pip install torch
             pip install tensorflow
             pip install bert
 
