@@ -34,9 +34,7 @@ jobs:
             pip install transformers
 
       # Runs a set of commands using the runners shell
-      - name: Run bert_cnn_model
-        run: |
-        
       - name: Run trained model
         run: |
+            python BerCovNev.py
       
