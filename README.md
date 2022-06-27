@@ -25,6 +25,17 @@ conda activate BerCovNet
 pip install requirements.txt
 ```
 
+3. Update Submodule
+
+```shell
+git submodule update --init
+```
+
+4. Run python file
+```shell
+python BerCovNet.py
+```
+
 
 # Results
 
