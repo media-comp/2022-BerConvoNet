@@ -28,6 +28,9 @@ import torch.nn as nn
 from sklearn.model_selection import train_test_split
 from torch.utils.data import TensorDataset, DataLoader, RandomSampler, SequentialSampler
 
+# parser
+from parser import args
+
 strategy = tf.distribute.MirroredStrategy()
 
 df = pd.read_csv('fake_or_real_news.csv')
@@ -195,15 +198,15 @@ fig1.savefig("real_new_word_cloud.png", bbox_inches = 'tight', dpi = 600)
 from sklearn.model_selection import train_test_split
 x_train, x_test, y_train, y_test = train_test_split(df['text'], df['label'], stratify = df['label'])
 
-max_len =  128
-train_batch_size = 16
-valid_batch_size = 16
-epochs = 3
-learning_rate = 1e-5
+max_len = args.max_len
+train_batch_size = args.batch_size
+valid_batch_size = args.batch_size
+epochs = args.epochs
+learning_rate = args.learning_rate
+dropout = args.dropout
 filters = 50
 filter_sizes = [2, 3 ,4 ,5]
 hidden_size = 768
-dropout = 0.1
 
 from transformers import BertTokenizer, BertModel, BertConfig
 tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
@@ -238,7 +241,7 @@ y_train_tensor = torch.tensor(y_train_2d)
 y_test_tensor = torch.tensor(y_test_2d)
 
 #DataLoaders -> data become iteral
-batch_size = 16
+batch_size = args.batch_size
 
 train_data = TensorDataset(x_train_tokens['input_ids'], x_train_tokens['token_type_ids'], x_train_tokens['attention_mask'], y_train_tensor)
 train_data_sampler = RandomSampler(train_data)
